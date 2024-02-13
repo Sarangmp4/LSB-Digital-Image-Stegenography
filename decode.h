@@ -19,7 +19,7 @@ Status do_decoding(DecodeInfo *decInfo);
 Status open_files_decode(DecodeInfo *decInfo);
 
 /*magic string decoding */
-Status decoding_magic_string(DecodeInfo *decInfo);
+Status decoding_magic_string(const char *magic_string,DecodeInfo *decInfo);
 
 /* length decoding function */
 Status length_decoding(DecodeInfo *decInfo,int *length);
