@@ -66,15 +66,7 @@ Status open_files_decode(DecodeInfo *decInfo)
     decInfo->fptr_output_img=fopen(decInfo->output_img_name,"r");
     if(decInfo->fptr_output_img != NULL)
     {
-	decInfo->fptr_output_text=fopen(decInfo->output_text_name,"w");
-	if(decInfo->fptr_output_text != NULL)
-	{
 	    return e_success;
-	}
-	else
-	{
-	    return e_failure;
-	}
     }
     else
     {
@@ -125,6 +117,12 @@ Status decoding_secret_file_extension(DecodeInfo *decInfo)
     }
     exten_string[length]='\0';
     printf("SECRET FILE EXTENSION IS %s",exten_string);
+    strcat(decInfo->output_text_name,exten_string);
+    decInfo->fptr_output_text=fopen(decInfo->output_text_name,"w");
+     if(decInfo->fptr_output_text == NULL)
+      {
+        return e_failure;
+      }
     printf("\n");
     return e_success;
 }
