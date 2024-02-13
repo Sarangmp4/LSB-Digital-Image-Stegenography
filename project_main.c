@@ -51,14 +51,17 @@ int main(int argc,char *argv[])
 	    DecodeInfo decinfo;   //structor initialisation
 
 	    decinfo.output_img_name=argv[2];
+	decinfo.output_text_name=(char *)malloc(30*sizeof(char));  //dynamic memory allocation using malloc
 
 	    if(argv[3] != NULL)
 	    {
 		decinfo.output_text_name=argv[3];
 	    }
 	    else
-		decinfo.output_text_name= "outsecret.txt";
-
+	    {
+		    char ch[20]="fileout";
+		    strcpy(decinfo.output_text_name,ch);
+	    }
 	    if(do_decoding(&decinfo)==e_success)
 	    {
 		printf("[*] Decoding completely successfull\n");
