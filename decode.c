@@ -12,7 +12,7 @@ Status do_decoding(DecodeInfo *decInfo)
 	fseek(decInfo->fptr_output_img,54,SEEK_SET);
 	printf("\n");
 	//calling magic string decoding function
-	if( decoding_magic_string(decInfo) == e_success )
+	if( decoding_magic_string(MAGIC_STRING,decInfo) == e_success )
 	{
 	    printf("\n");
 	    printf("[*] Dcoding magic string is completed\n");
@@ -75,7 +75,7 @@ Status open_files_decode(DecodeInfo *decInfo)
 }
 
 //magic string decoding function
-Status decoding_magic_string(DecodeInfo *decInfo)
+Status decoding_magic_string(const char *magic_string,DecodeInfo *decInfo)
 {
     //magic length decoding
     int length=0;
@@ -84,16 +84,24 @@ Status decoding_magic_string(DecodeInfo *decInfo)
 
     //magic data decoding
     char data;
-    char magic_string[length+1];
+    char magic_string_data[length+1];
     for(int i=0;i<length;i++)
     {
 	data=0x00;
 	character_decoding(decInfo,&data); //function calling
-	magic_string[i]=data;
+	magic_string_data[i]=data;
     }
-    magic_string[length]='\0';
-    printf("MAGIC STRING IS DECODED AND IT IS %s",magic_string);
-    printf("\n");
+    magic_string_data[length]='\0';
+    printf("MAGIC STRING IS DECODED AND IT IS %s\n",magic_string_data);
+	if(strcmp(magic_string,magic_string_data)==0)
+	{
+		return e_success;
+	}
+	else
+	{
+                printf("MAGIC STRING AUTHENTICATION IS FAILED\n");
+		return e_failure;
+	}
 
     return e_success;
 }
