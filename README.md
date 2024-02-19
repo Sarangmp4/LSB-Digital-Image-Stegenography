@@ -1,5 +1,5 @@
 # LSB Digital Steganography
-
+Steganography is the practice of representing information within another message or physical object, in such a manner that the presence of the information is not evident to human inspection.
 This project implements Least Significant Bit (LSB) digital steganography to hide a text message within a .bmp image file. The project includes a C program for encoding the message into the image and decoding the message from the image.
 
 ### How it Works
